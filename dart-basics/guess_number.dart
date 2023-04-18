@@ -24,6 +24,7 @@ void main() {
 
     checkNumber(userInput, number);
     counter++;
+    higherOrLower(number, userInput);
     print('You have passed try number $counter');
     currentInput = userInput;
 
@@ -41,4 +42,9 @@ bool checkNumber(int numberRef, int numberToCheck) {
 String pluralize(int counter) {
   if (counter > 1) return 'tries';
   else return 'try';
+}
+
+void higherOrLower(int numberRef, int numberToCheck) {
+  if (numberRef > numberToCheck) print('Your number is lower than the number you need to guess');
+  else print('Your number is higher than the number you need to guess');
 }
