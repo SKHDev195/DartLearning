@@ -13,18 +13,77 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.amber,
-          ),
         ),
+      ),
       home: Scaffold(
-
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Flutter Basics')
-          ),
-        body: const Center(
-          child: Text('Hello World!')
-          ),
+        appBar: AppBar(centerTitle: true, title: const Text('Flutter Basics')),
+        body: Center(
+          child: Container(
+              color: Colors.pink,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    const Flexible(
+                      child: Text(
+                        'Just Another Text for Row  - it is very very long for test purposes',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Container(height: 20, width: 20, color: Colors.blue),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Container(height: 20, width: 20, color: Colors.green),
+                  ]),
+                  Container(
+                      color: Colors.green,
+                      child: const Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Text('Column Child One'),
+                      )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      height: 200,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blue),
+                      child: const Center(
+                        child: Text('Hello World',
+                            style: TextStyle(color: Colors.red, fontSize: 20)),
+                      )),
+                  Stack(
+                    children: [
+                      SizedBox(
+                        height: 200,
+                        width: 200,
+                        child:
+                            Image.asset('assets/test.jpg', fit: BoxFit.contain),
+                      ),
+                      const Positioned(
+                          top: 80, left: 20, child: Text('Lego Minifigs')),
+                    ],
+                  ),
+                  const SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          'https://media.cnn.com/api/v1/images/stellar/prod/230326144721-01-formula-equality.jpg?c=16x9&q=w_850,c_fill',
+                        ),
+                      )),
+                  const SizedBox(height: 40, width: 40),
+                  const Text('Last Column Child'),
+                ],
+              )),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => debugPrint('clicked'),
           child: const Icon(Icons.ac_unit),
@@ -33,6 +92,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
