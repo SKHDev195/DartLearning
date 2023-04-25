@@ -1,11 +1,66 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  final List<Question> questions = [
+    Question(
+        questionText: 'How many fish are there in the world?',
+        questionCategory: QuestionCategory.sciences),
+    Question(
+        questionText: 'What is Da Vinci\'s name?',
+        questionCategory: QuestionCategory.arts),
+    Question(
+        questionText: 'When was Pump Up the Jam (the song) released?',
+        questionCategory: QuestionCategory.history),
+    Question(
+        questionText: 'What is the name of the smallest unit of life?',
+        questionCategory: QuestionCategory.sciences),
+    Question(
+        questionText:
+            'In physics, what term is used to describe the resistance of an object to changes in its state of motion?',
+        questionCategory: QuestionCategory.sciences),
+    Question(
+        questionText:
+            'What is the name of the character played by Hugh Jackman in the X-Men movies?',
+        questionCategory: QuestionCategory.entertainment),
+    Question(
+        questionText: 'Who wrote the novel "The Catcher in the Rye"?',
+        questionCategory: QuestionCategory.arts),
+    Question(
+        questionText:
+            'What is the highest-grossing film of all time (not adjusted for inflation)?',
+        questionCategory: QuestionCategory.entertainment),
+    Question(
+        questionText:
+            'Who was the first president of the United States of America?',
+        questionCategory: QuestionCategory.history),
+    Question(
+        questionText: 'In what year did World War II end?',
+        questionCategory: QuestionCategory.history),
+    Question(
+        questionText:
+            'Who was the first female Prime Minister of the United Kingdom?',
+        questionCategory: QuestionCategory.history),
+    Question(
+        questionText: 'In which sport would you use a shuttlecock?',
+        questionCategory: QuestionCategory.sports),
+  ];
+
+  runApp(MyApp(
+    questionList: questions,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key, required List<Question> this.questionList}) {}
+
+  late List<Question> questionList;
+
+  List<QuestionWidget> get questions => questionList
+      .map((item) => QuestionWidget(
+            questionText: item.questionText,
+            questionCategory: item.questionCategory,
+          ))
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -35,136 +90,12 @@ class MyApp extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     direction: contentDirection,
                     children: [
-                      const QuestionWidget(
-                        questionText: 'How many fish are there in the world?',
-                        questionCategory: 'Sciences',
-                      ),
-                      const QuestionWidget(
-                        questionText: 'What is Da Vinci\'s name?',
-                        questionCategory: 'Arts',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'When was Pump Up the Jam (the song) released?',
-                        questionCategory: 'History',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'What is the name of the smallest unit of life?',
-                        questionCategory: 'Sciences',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'In physics, what term is used to describe the resistance of an object to changes in its state of motion?',
-                        questionCategory: 'Sciences',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'What is the name of the character played by Hugh Jackman in the X-Men movies?',
-                        questionCategory: 'Arts',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'Who wrote the novel "The Catcher in the Rye"?',
-                        questionCategory: 'Arts',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'What is the highest-grossing film of all time (not adjusted for inflation)?',
-                        questionCategory: 'Arts',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'Who was the first president of the United States of America?',
-                        questionCategory: 'History',
-                      ),
-                      const QuestionWidget(
-                        questionText: 'In what year did World War II end?',
-                        questionCategory: 'History',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'Who was the first female Prime Minister of the United Kingdom?',
-                        questionCategory: 'History',
-                      ),
-                      const QuestionWidget(
-                        questionText:
-                            'In which sport would you use a shuttlecock?',
-                        questionCategory: 'Badminton',
-                      ),
+                      for (QuestionWidget question in questions) question,
                     ],
                   ),
                 ),
               );
             })));
-    /*Center(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Flex(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                direction: Axis.vertical,
-                children: [
-                  const QuestionWidget(
-                    questionText: 'How many fish are there in the world?',
-                    questionCategory: 'Sciences',
-                  ),
-                  const QuestionWidget(
-                    questionText: 'What is Da Vinci\'s name?',
-                    questionCategory: 'Arts',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'When was Pump Up the Jam (the song) released?',
-                    questionCategory: 'History',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'What is the name of the smallest unit of life?',
-                    questionCategory: 'Sciences',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'In physics, what term is used to describe the resistance of an object to changes in its state of motion?',
-                    questionCategory: 'Sciences',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'What is the name of the character played by Hugh Jackman in the X-Men movies?',
-                    questionCategory: 'Arts',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'Who wrote the novel "The Catcher in the Rye"?',
-                    questionCategory: 'Arts',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'What is the highest-grossing film of all time (not adjusted for inflation)?',
-                    questionCategory: 'Arts',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'Who was the first president of the United States of America?',
-                    questionCategory: 'History',
-                  ),
-                  const QuestionWidget(
-                    questionText: 'In what year did World War II end?',
-                    questionCategory: 'History',
-                  ),
-                  const QuestionWidget(
-                    questionText:
-                        'Who was the first female Prime Minister of the United Kingdom?',
-                    questionCategory: 'History',
-                  ),
-                  const QuestionWidget(
-                    questionText: 'In which sport would you use a shuttlecock?',
-                    questionCategory: 'Badminton',
-                  ),
-                ],
-              ),
-            ),
-          ),*/
   }
 }
 
@@ -176,7 +107,7 @@ class QuestionWidget extends StatelessWidget {
   });
 
   final String questionText;
-  final String questionCategory;
+  final QuestionCategory questionCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -185,40 +116,38 @@ class QuestionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-                height: 70,
-                width: 70,
-                child: Center(
-                    child: Image.asset(
-                        'assets/${createImage(questionCategory)}'))),
-          ],
+        SizedBox(
+          width: 70,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset('assets/${questionCategory.image}'),
+            ],
+          ),
         ),
         SizedBox(
           width: 16,
         ),
         Flexible(
-            flex: 3,
-            fit: FlexFit.loose,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text('Question!',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(
-                  questionCategory,
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  questionText,
-                  textAlign: TextAlign.center,
-                )
-              ],
-            )),
+          fit: FlexFit.loose,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text('Question!',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                questionCategory.categoryName,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                questionText,
+                textAlign: TextAlign.center,
+              )
+            ],
+          ),
+        ),
         const SizedBox(
           height: 100,
           width: 20,
@@ -228,21 +157,32 @@ class QuestionWidget extends StatelessWidget {
   }
 }
 
-String createImage(String category) {
-  switch (category) {
-    case 'History':
-      return 'history.png';
-    case 'Geography':
-      return 'geography.png';
-    case 'Sciences':
-      return 'sciences.png';
-    case 'Sports':
-      return 'sports.png';
-    case 'Arts':
-      return 'arts.png';
-    case 'Entertainment':
-      return 'entertainment.png';
-    default:
-      return 'sciences.png';
-  }
+enum QuestionCategory {
+  history(categoryName: 'History', image: 'history.png'),
+  geography(categoryName: 'Geography', image: 'geography.png'),
+  sciences(categoryName: 'Sciences', image: 'sciences.png'),
+  sports(categoryName: 'Sports', image: 'sports.png'),
+  arts(categoryName: 'Arts', image: 'arts.png'),
+  entertainment(categoryName: 'Entertainment', image: 'entertainment.png');
+
+  final String categoryName;
+  final String image;
+
+  const QuestionCategory({required this.categoryName, required this.image});
+}
+
+class Question {
+  late String _questionText;
+  late QuestionCategory _questionCategory;
+  late String _image;
+
+  String get questionText => _questionText;
+  QuestionCategory get questionCategory => _questionCategory;
+  String get image => _questionCategory.image;
+
+  Question(
+      {required String questionText,
+      required QuestionCategory questionCategory})
+      : _questionText = questionText,
+        _questionCategory = questionCategory;
 }
