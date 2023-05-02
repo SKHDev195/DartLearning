@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:question/presentation/components/question_category.dart';
 
 class QuestionWidget extends StatelessWidget {
-  const QuestionWidget({
-    super.key,
-    required this.questionText,
-    required this.questionCategory,
-  });
+  const QuestionWidget(
+      {super.key,
+      required this.questionText,
+      required this.questionCategory,
+      required this.questionNumber,
+      required this.widgetDirection});
 
   final String questionText;
   final QuestionCategory questionCategory;
+  final int questionNumber;
+  final Axis widgetDirection;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

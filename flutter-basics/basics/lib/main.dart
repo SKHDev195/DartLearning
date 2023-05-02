@@ -1,5 +1,7 @@
+import 'package:basics/presentation/counter/counter_screen.dart';
+import 'package:basics/presentation/list/list_screen.dart';
 import 'package:flutter/material.dart';
-import 'presentation/widgetExamples/widget_examples_screen.dart';
+import 'presentation/widget_examples/widget_examples_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +18,6 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.amber,
           ),
         ),
-        home: WidgetExamplesScreen());
+        home: const ListScreen());
   }
 }

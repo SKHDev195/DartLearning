@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:question/presentation/components/questions_all.dart';
-import 'package:question/presentation/widgets/question_widget.dart';
+import 'package:question/presentation/questions_screen/widgets/question_separator.dart';
+import 'package:question/presentation/questions_screen/widgets/question_widget.dart';
 import 'presentation/components/question.dart';
 
 void main() {
-  runApp(MyApp(
+  runApp(QuestionApp(
     questionList: questionsAll,
   ));
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key, required List<Question> this.questionList});
+class QuestionApp extends StatefulWidget {
+  QuestionApp({super.key, required this.questionList});
 
-  late List<Question> questionList;
+  final List<Question> questionList;
+
+  @override
+  State<QuestionApp> createState() => _QuestionAppState();
+}
+
+class _QuestionAppState extends State<QuestionApp> {
+  final List<Question> _displayedQuestions = [];
 
   final _valueNotifier = ValueNotifier(false);
 
-  List<QuestionWidget> questionsWidgets = [];
+  final _scrollController = ScrollController();
 
   void _addNewQuestion() {
-    if (questionList.isNotEmpty) {
-      questionsWidgets.add(QuestionWidget(
-        questionText: questionList[0].questionText,
-        questionCategory: questionList[0].questionCategory,
-      ));
-      questionList.removeAt(0);
-      _valueNotifier.value = !_valueNotifier.value;
-    }
+    setState(() {
+      if (_displayedQuestions.length < widget.questionList.length) {
+        _displayedQuestions.add(widget.questionList[0]);
+        _valueNotifier.value = !_valueNotifier.value;
+
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   @override
@@ -42,40 +54,39 @@ class MyApp extends StatelessWidget {
             centerTitle: true,
             title: const Text('Quiz App'),
           ),
-          body: ValueListenableBuilder(
-              valueListenable: _valueNotifier,
-              builder: (context, constraints, value) {
-                return LayoutBuilder(builder: (context, constraints) {
-                  late Axis contentDirection;
-                  if (constraints.maxWidth > 600)
-                    contentDirection = Axis.horizontal;
-                  else
-                    contentDirection = Axis.vertical;
-                  return Center(
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
+          body: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: ValueListenableBuilder(
+                valueListenable: _valueNotifier,
+                builder: (context, constraints, value) {
+                  return LayoutBuilder(builder: (context, constraints) {
+                    late Axis contentDirection;
+                    if (constraints.maxWidth > 600) {
+                      contentDirection = Axis.horizontal;
+                    } else {
+                      contentDirection = Axis.vertical;
+                    }
+                    return ListView.separated(
+                      controller: _scrollController,
                       scrollDirection: contentDirection,
-                      child: Flex(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        direction: contentDirection,
-                        children: [
-                          const Text(
-                              'To add questions, click on the button below!'),
-                          const SizedBox(
-                            height: 40,
-                            width: 40,
-                          ),
-                          for (QuestionWidget question in questionsWidgets)
-                            question,
-                          if (questionList.isEmpty)
-                            const Text('There are no more questions!'),
-                        ],
-                      ),
-                    ),
-                  );
-                });
-              }),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: _displayedQuestions.length,
+                      separatorBuilder: (context, index) {
+                        return const QuestionSeparator();
+                      },
+                      itemBuilder: (context, index) {
+                        return QuestionWidget(
+                          questionCategory:
+                              widget.questionList[index].questionCategory,
+                          questionText: widget.questionList[index].questionText,
+                          questionNumber: index + 1,
+                          widgetDirection: contentDirection,
+                        );
+                      },
+                    );
+                  });
+                }),
+          ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addNewQuestion(),
             child: const Icon(Icons.add),
