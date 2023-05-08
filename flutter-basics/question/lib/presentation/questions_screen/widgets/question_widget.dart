@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:question/presentation/components/question_category.dart';
+import 'package:question/presentation/question_details_screen/question_details_screen.dart';
 
 class QuestionWidget extends StatelessWidget {
-  const QuestionWidget(
-      {super.key,
-      required this.questionText,
-      required this.questionCategory,
-      required this.questionNumber,
-      required this.widgetDirection});
+  const QuestionWidget({
+    super.key,
+    required this.questionText,
+    required this.questionCategory,
+    required this.questionNumber,
+  });
 
   final String questionText;
   final QuestionCategory questionCategory;
   final int questionNumber;
-  final Axis widgetDirection;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class QuestionWidget extends StatelessWidget {
           width: 70,
           child: Image.asset('assets/${questionCategory.image}'),
         ),
-        SizedBox(
+        const SizedBox(
           width: 16,
         ),
         Flexible(
@@ -34,8 +34,8 @@ class QuestionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Question!',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+              Text('Question #$questionNumber!',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               Text(
                 questionCategory.categoryName,
               ),

@@ -1,5 +1,7 @@
 import 'package:basics/main.dart';
 import 'package:basics/presentation/components/custom_button.dart';
+import 'package:basics/presentation/navigation_example_screens/screen_one.dart';
+import 'package:basics/presentation/navigation_example_screens/screen_two.dart';
 import 'package:basics/presentation/widget_examples/widgets/first_column_child.dart';
 import 'package:basics/presentation/widget_examples/widgets/hello_world_widget.dart';
 import 'package:basics/presentation/widget_examples/widgets/row_expanded_example.dart';
@@ -77,7 +79,11 @@ class WidgetExamplesScreen extends StatelessWidget {
                   const SizedBox(height: 40, width: 40),
                   CustomButton(
                     onTap: () {
-                      print('tapped!');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ScreenTwo(),
+                          ));
                     },
                     icon: Icons.home,
                     iconColor: Colors.white,
@@ -85,7 +91,11 @@ class WidgetExamplesScreen extends StatelessWidget {
                   const SizedBox(height: 40, width: 40),
                   CustomButton(
                     onTap: () {
-                      print('tapped!');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ScreenOne(),
+                          ));
                     },
                     icon: Icons.play_arrow,
                     iconColor: Colors.blue,
@@ -93,7 +103,11 @@ class WidgetExamplesScreen extends StatelessWidget {
                   const SizedBox(height: 40, width: 40),
                   CustomButtonGesture(
                       onTap: () {
-                        print('tagged CBM!');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ScreenTwo(),
+                            ));
                       },
                       text: 'gesture button'),
                 ],
