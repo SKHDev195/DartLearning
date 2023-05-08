@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:question/presentation/components/question.dart';
+import 'package:question/presentation/question_details_screen/widgets/hint__solution_button.dart';
 import 'package:question/presentation/question_details_screen/widgets/show_hint_one_button.dart';
 import 'package:question/presentation/question_details_screen/widgets/show_hint_two_button.dart';
 import 'package:question/presentation/question_details_screen/widgets/show_solution_button.dart';
@@ -54,22 +55,19 @@ class _QuestionDetailsScreenState extends State<QuestionDetailsScreen> {
           ),
           Container(
             alignment: Alignment.center,
-            child: ShowHintOneButton(question: widget.question),
+            child: ShowHintSolutionButton(question: widget.question),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
-          Container(
-            alignment: Alignment.center,
-            child: ShowHintTwoButton(question: widget.question),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: ShowSolutionButton(question: widget.question),
-          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              alignment: Alignment.center,
+              child: const Text(
+                  'Press the button above  for two hints, press it again for the solution'),
+            ),
+          )
         ],
       ),
     );
