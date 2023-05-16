@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+
+class FormWarningSnackBar extends SnackBar {
+  FormWarningSnackBar({Key? key})
+      : super(
+          key: key,
+          backgroundColor: Colors.amber,
+          duration: const Duration(seconds: 10),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Form incomplete',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SnackBarAction(
+                label: 'Hide',
+                onPressed: () {},
+                textColor: Colors.white,
+              ),
+            ],
+          ),
+        );
+}

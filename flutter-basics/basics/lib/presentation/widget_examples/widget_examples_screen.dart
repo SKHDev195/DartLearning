@@ -91,11 +91,10 @@ class WidgetExamplesScreen extends StatelessWidget {
                   const SizedBox(height: 40, width: 40),
                   CustomButton(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ScreenOne(),
-                          ));
+                      Navigator.pushNamed(
+                        context,
+                        '/screenOne',
+                      );
                     },
                     icon: Icons.play_arrow,
                     iconColor: Colors.blue,
@@ -103,11 +102,10 @@ class WidgetExamplesScreen extends StatelessWidget {
                   const SizedBox(height: 40, width: 40),
                   CustomButtonGesture(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ScreenTwo(),
-                            ));
+                        Navigator.pushNamed(
+                          context,
+                          '/screenTwo',
+                        );
                       },
                       text: 'gesture button'),
                 ],

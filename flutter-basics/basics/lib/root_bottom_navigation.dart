@@ -26,7 +26,9 @@ class _RootBottomNavigationState extends State<RootBottomNavigation> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.amber,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
         selectedItemColor: Colors.white,
         onTap: (index) {
           setState(() {

@@ -1,3 +1,5 @@
+import 'package:basics/presentation/navigation_example_screens/screen_one.dart';
+import 'package:basics/presentation/navigation_example_screens/screen_two.dart';
 import 'package:basics/root_bottom_navigation.dart';
 import 'package:basics/presentation/counter/counter_screen.dart';
 import 'package:basics/presentation/list/list_screen.dart';
@@ -14,11 +16,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.amber,
-          ),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.amber,
         ),
-        home: const RootBottomNavigation());
+      ),
+      home: const RootBottomNavigation(),
+      initialRoute: '/root',
+      routes: {
+        '/root': (BuildContext context) => const RootBottomNavigation(),
+        '/screenOne': (BuildContext context) => const ScreenOne(),
+        '/screenTwo': (BuildContext context) => const ScreenTwo(),
+      },
+    );
   }
 }

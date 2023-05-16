@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:question/presentation/components/question.dart';
+import 'package:question/presentation/question_details_screen/components/question_details_screen_args.dart';
 import 'package:question/presentation/question_details_screen/question_details_screen.dart';
 import 'package:question/presentation/questions_screen/widgets/question_separator.dart';
 import 'package:question/presentation/questions_screen/widgets/question_widget.dart';
@@ -23,25 +24,40 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   final random = Random();
 
   void _addNewQuestion() {
+    if (_displayedQuestions.length < widget.questionList.length) {
+      _displayedQuestions.add(widget.questionList[0]);
+    }
+  }
+
+  void _displayNewQuestion() {
     setState(() {
-      if (_displayedQuestions.length < widget.questionList.length) {
-        _displayedQuestions.add(widget.questionList[0]);
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeOut,
-        );
-      }
+      _addNewQuestion();
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOut,
+      );
     });
   }
 
   void _goToRandomQuestion() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      int randomIndex = random.nextInt(_displayedQuestions.length);
-      return QuestionDetailsScreen(
+    int randomIndex = random.nextInt(_displayedQuestions.length);
+    Navigator.pushNamed(context, '/questionDetails',
+        arguments: QuestionDetailsScreenArgs(
           question: _displayedQuestions[randomIndex],
-          questionNumber: randomIndex);
-    }));
+          questionNumber: randomIndex,
+        ));
+    /*Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          int randomIndex = random.nextInt(_displayedQuestions.length);
+          return QuestionDetailsScreen(
+              question: _displayedQuestions[randomIndex],
+              questionNumber: randomIndex);
+        },
+      ),
+    );*/
   }
 
   @override
@@ -72,7 +88,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(context, '/questionDetails',
+                        arguments: QuestionDetailsScreenArgs(
+                          question: widget.questionList[index],
+                          questionNumber: index,
+                        ));
+                    /*Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => QuestionDetailsScreen(
@@ -80,7 +101,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           questionNumber: index,
                         ),
                       ),
-                    );
+                    );*/
                   },
                   child: QuestionWidget(
                     questionCategory:
@@ -102,7 +123,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 onPressed: () => _goToRandomQuestion(),
                 child: const Icon(Icons.question_mark)),
             FloatingActionButton(
-              onPressed: () => _addNewQuestion(),
+              onPressed: () => _displayNewQuestion(),
               child: const Icon(Icons.add),
             ),
           ],
