@@ -47,17 +47,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           question: _displayedQuestions[randomIndex],
           questionNumber: randomIndex,
         ));
-    /*Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          int randomIndex = random.nextInt(_displayedQuestions.length);
-          return QuestionDetailsScreen(
-              question: _displayedQuestions[randomIndex],
-              questionNumber: randomIndex);
-        },
-      ),
-    );*/
   }
 
   @override
@@ -93,15 +82,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           question: widget.questionList[index],
                           questionNumber: index,
                         ));
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QuestionDetailsScreen(
-                          question: widget.questionList[index],
-                          questionNumber: index,
-                        ),
-                      ),
-                    );*/
                   },
                   child: QuestionWidget(
                     questionCategory:

@@ -15,6 +15,7 @@ class NewQuestionScreen extends StatefulWidget {
 
 class _NewQuestionScreenState extends State<NewQuestionScreen> {
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> _dropdownKey = GlobalKey<FormFieldState>();
   final TextEditingController _questionTextController = TextEditingController();
   final TextEditingController _questionHintOneController =
       TextEditingController();
@@ -35,109 +36,113 @@ class _NewQuestionScreenState extends State<NewQuestionScreen> {
         centerTitle: true,
         title: const Text('Add New Question'),
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const Center(child: Text('Define your question below')),
-              const SizedBox(
-                height: 8,
-              ),
-              Form(
-                autovalidateMode: _autovalidateMode,
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _questionTextController,
-                      decoration: const InputDecoration(
-                        labelText: 'Question Text *',
-                      ),
-                      maxLines: 3,
-                      textInputAction: TextInputAction.done,
-                      validator: (value) => _validateTextField(
-                        value: value,
-                        isHelp: false,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      controller: _questionHintOneController,
-                      decoration: const InputDecoration(
-                        labelText: 'Question Hint One *',
-                      ),
-                      maxLines: 1,
-                      textInputAction: TextInputAction.done,
-                      validator: (value) => _validateTextField(
-                        value: value,
-                        isHelp: true,
-                      ),
-                    ),
-                    TextFormField(
-                      controller: _questionHintTwoController,
-                      decoration: const InputDecoration(
-                        labelText: 'Question Hint Two *',
-                      ),
-                      maxLines: 1,
-                      textInputAction: TextInputAction.done,
-                      validator: (value) => _validateTextField(
-                        value: value,
-                        isHelp: true,
-                      ),
-                    ),
-                    TextFormField(
-                      controller: _questionSolutionController,
-                      decoration: const InputDecoration(
-                        labelText: 'Question Solution *',
-                      ),
-                      maxLines: 1,
-                      textInputAction: TextInputAction.done,
-                      validator: (value) => _validateTextField(
-                        value: value,
-                        isHelp: true,
-                      ),
-                    ),
-                    DropdownButtonFormField<String>(
-                      validator: (value) =>
-                          _validateCategoryField(value: value),
-                      decoration: const InputDecoration(
-                        labelText: 'Question Category',
-                      ),
-                      items: QuestionCategory.values
-                          .map((QuestionCategory questionCategory) {
-                        return DropdownMenuItem<String>(
-                          value: questionCategory.name,
-                          child: Text(_capitalizeCategoryName(
-                            value: questionCategory.name,
-                          )),
-                        );
-                      }).toList(),
-                      onChanged: (String? questionCategory) {
-                        setState(
-                          () {
-                            _selectedCategory = questionCategory ?? 'Sciences';
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SubmitQuestionFormButton(
-                      onTap: _submitForm,
-                    ),
-                  ],
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Center(child: Text('Define your question below')),
+                const SizedBox(
+                  height: 8,
                 ),
-              ),
-            ],
+                Form(
+                  autovalidateMode: _autovalidateMode,
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _questionTextController,
+                        decoration: const InputDecoration(
+                          labelText: 'Question Text *',
+                        ),
+                        maxLines: 3,
+                        textInputAction: TextInputAction.done,
+                        validator: (value) => _validateTextField(
+                          value: value,
+                          isHelp: false,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextFormField(
+                        controller: _questionHintOneController,
+                        decoration: const InputDecoration(
+                          labelText: 'Question Hint One *',
+                        ),
+                        maxLines: 1,
+                        textInputAction: TextInputAction.done,
+                        validator: (value) => _validateTextField(
+                          value: value,
+                          isHelp: true,
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _questionHintTwoController,
+                        decoration: const InputDecoration(
+                          labelText: 'Question Hint Two *',
+                        ),
+                        maxLines: 1,
+                        textInputAction: TextInputAction.done,
+                        validator: (value) => _validateTextField(
+                          value: value,
+                          isHelp: true,
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _questionSolutionController,
+                        decoration: const InputDecoration(
+                          labelText: 'Question Solution *',
+                        ),
+                        maxLines: 1,
+                        textInputAction: TextInputAction.done,
+                        validator: (value) => _validateTextField(
+                          value: value,
+                          isHelp: true,
+                        ),
+                      ),
+                      DropdownButtonFormField<String>(
+                        key: _dropdownKey,
+                        validator: (value) =>
+                            _validateCategoryField(value: value),
+                        decoration: const InputDecoration(
+                          labelText: 'Question Category',
+                        ),
+                        items: QuestionCategory.values
+                            .map((QuestionCategory questionCategory) {
+                          return DropdownMenuItem<String>(
+                            value: questionCategory.name,
+                            child: Text(_capitalizeCategoryName(
+                              value: questionCategory.name,
+                            )),
+                          );
+                        }).toList(),
+                        onChanged: (String? questionCategory) {
+                          setState(
+                            () {
+                              _selectedCategory =
+                                  questionCategory ?? 'Sciences';
+                            },
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      SubmitQuestionFormButton(
+                        onTap: _submitForm,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -189,6 +194,13 @@ class _NewQuestionScreenState extends State<NewQuestionScreen> {
       );
       ScaffoldMessenger.of(context)
           .showSnackBar(SuccessfulSubmissionSnackBar());
+      _questionTextController.clear();
+      _questionHintOneController.clear();
+      _questionHintOneController.clear();
+      _questionHintTwoController.clear();
+      _questionSolutionController.clear();
+      _dropdownKey.currentState!.reset();
+      setState(() {});
     } else {
       setState(
         () {
