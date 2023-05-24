@@ -8,7 +8,6 @@ class ScreenOne extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Screen One'),
-        backgroundColor: Colors.blueAccent,
       ),
       body: Center(
         child: TextButton(

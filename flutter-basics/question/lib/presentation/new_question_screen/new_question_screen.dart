@@ -30,9 +30,7 @@ class _NewQuestionScreenState extends State<NewQuestionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.amber,
         centerTitle: true,
         title: const Text('Add New Question'),
       ),

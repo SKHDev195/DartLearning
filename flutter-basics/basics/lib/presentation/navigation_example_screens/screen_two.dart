@@ -9,7 +9,6 @@ class ScreenTwo extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Screen Two'),
-          backgroundColor: Colors.greenAccent,
         ),
         body: Center(
           child: TextButton(

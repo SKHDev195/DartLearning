@@ -20,7 +20,6 @@ class _MyWidgetState extends State<ListItem> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.lightBlueAccent,
         borderRadius: BorderRadius.circular(5),
       ),
       child: ListTile(

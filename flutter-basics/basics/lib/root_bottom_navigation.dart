@@ -1,5 +1,6 @@
 import 'package:basics/presentation/counter/counter_screen.dart';
 import 'package:basics/presentation/list/list_screen.dart';
+import 'package:basics/presentation/theme_animation/theme_animation_screen.dart';
 import 'package:basics/presentation/widget_examples/widget_examples_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,14 +23,15 @@ class _RootBottomNavigationState extends State<RootBottomNavigation> {
           WidgetExamplesScreen(),
           CounterScreen(),
           ListScreen(),
+          ThemeAnimationScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.amber,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
-        selectedItemColor: Colors.white,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
@@ -48,6 +50,10 @@ class _RootBottomNavigationState extends State<RootBottomNavigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
             label: "List",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.color_lens),
+            label: "Theme",
           ),
         ],
       ),

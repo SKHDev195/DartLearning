@@ -3,6 +3,7 @@ import 'package:question/presentation/components/question_app_nav_bar.dart';
 import 'package:question/presentation/components/questions_all.dart';
 import 'package:question/presentation/new_question_screen/new_question_screen.dart';
 import 'package:question/presentation/questions_screen/questions_screen.dart';
+import 'package:question/presentation/theme_switch_screen/theme_switch_screen.dart';
 
 class RootNavBar extends StatefulWidget {
   RootNavBar({super.key});
@@ -10,6 +11,7 @@ class RootNavBar extends StatefulWidget {
   final _screens = [
     QuestionsScreen(questionList: questionsAll),
     const NewQuestionScreen(),
+    const ThemeSwitchScreen(),
   ];
 
   @override

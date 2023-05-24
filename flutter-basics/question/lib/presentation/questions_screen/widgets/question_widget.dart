@@ -16,40 +16,50 @@ class QuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 70,
-          child: Image.asset('assets/${questionCategory.image}'),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(7),
+          color: Theme.of(context).colorScheme.primaryContainer,
         ),
-        const SizedBox(
-          width: 16,
-        ),
-        Flexible(
-          fit: FlexFit.loose,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Question #$questionNumber!',
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(
-                questionCategory.categoryName,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 85,
+              child: Image.asset('assets/${questionCategory.image}'),
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            Flexible(
+              fit: FlexFit.loose,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Question #$questionNumber!',
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    questionCategory.categoryName,
+                  ),
+                  Text(
+                    questionText,
+                  )
+                ],
               ),
-              Text(
-                questionText,
-              )
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 130,
+              width: 20,
+            )
+          ],
         ),
-        const SizedBox(
-          height: 100,
-          width: 20,
-        )
-      ],
+      ),
     );
   }
 }

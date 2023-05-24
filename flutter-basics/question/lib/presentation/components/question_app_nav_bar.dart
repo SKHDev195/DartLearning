@@ -28,11 +28,9 @@ class QuestionAppNavBar extends StatelessWidget {
         children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.amber,
         selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
-        selectedItemColor: Colors.white,
         onTap: onTabSelected,
         currentIndex: currentIndex,
         items: const [
@@ -43,7 +41,11 @@ class QuestionAppNavBar extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.add_task),
             label: "Add Question",
-          )
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.palette),
+            label: "Theme",
+          ),
         ],
       ),
     );
@@ -55,14 +57,10 @@ class QuestionAppNavBar extends StatelessWidget {
         children: [
           NavigationRail(
             groupAlignment: 0.0,
-            selectedIconTheme: const IconThemeData(
-              color: Colors.white,
-            ),
             trailing: const SizedBox(),
             leading: const SizedBox(),
             labelType: NavigationRailLabelType.all,
             selectedIndex: currentIndex,
-            backgroundColor: Colors.amber,
             selectedLabelTextStyle: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -81,13 +79,19 @@ class QuestionAppNavBar extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Text("Add Question"),
                 ),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.palette),
+                label: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("Theme"),
+                ),
               )
             ],
           ),
           const VerticalDivider(
             thickness: 1,
             width: 1,
-            color: Colors.black,
           ),
           Flexible(
             child: IndexedStack(
