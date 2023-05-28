@@ -1,4 +1,5 @@
 import 'package:advisor/2_application/core/services/theme_service.dart';
+import 'package:advisor/2_application/pages/advice/advice_page.dart';
 import 'package:advisor/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,14 +7,14 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      child: const MyApp(),
+      child: const AdvisorApp(),
       create: (context) => ThemeService(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class AdvisorApp extends StatelessWidget {
+  const AdvisorApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         themeMode: themeService.isDark ? ThemeMode.dark : ThemeMode.light,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        home: const Placeholder(),
+        home: const AdvicePage(),
       );
     });
   }
