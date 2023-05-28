@@ -36,7 +36,9 @@ class AdvicePage extends StatelessWidget {
           children: [
             Expanded(
               child: Center(
-                child: ErrorMessage(message: 'Something has gone wrong'),
+                child: ErrorMessage(
+                  message: 'Something has gone wrong',
+                ),
                 /*AdviceField(
                   advice: 'Example advice: some text here',
                 ),*/
