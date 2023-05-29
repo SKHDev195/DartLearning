@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class AdvisorBloc extends Bloc<AdvisorEvent, AdvisorState> {
       );
       debugPrint('got advice');
       emit(AdvisorStateLoaded(advice: 'fake advice'));
-      //emit(AdvisorStateError(message: 'error message'));
+      emit(AdvisorStateError(message: 'error message'));
     });
   }
 }
