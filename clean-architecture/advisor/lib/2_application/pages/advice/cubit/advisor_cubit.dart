@@ -11,13 +11,13 @@ class AdvisorCubit extends Cubit<AdvisorStateCubit> {
   Future<void> adviceRequested() async {
     emit(AdvisorStateLoading());
     // TODO: get advice here
-    debugPrint('fake advice triggered');
+
     await Future.delayed(
       const Duration(seconds: 3),
       () {},
     );
-    debugPrint('got advice');
+
     emit(const AdvisorStateLoaded(advice: 'fake advice'));
-    emit(const AdvisorStateError(message: 'error message'));
+    //emit(const AdvisorStateError(message: 'error message'));
   }
 }
