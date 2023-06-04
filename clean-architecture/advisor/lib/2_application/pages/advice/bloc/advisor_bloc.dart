@@ -16,7 +16,7 @@ class AdvisorBloc extends Bloc<AdvisorEvent, AdvisorState> {
         () {},
       );
       debugPrint('got advice');
-      emit(AdvisorStateLoaded(advice: 'fake advice'));
+      emit(AdvisorStateLoaded(advice: 'test'));
       emit(AdvisorStateError(message: 'error message'));
     });
   }
