@@ -3,8 +3,11 @@ import 'package:advisor/2_application/pages/advice/advisor_page.dart';
 import 'package:advisor/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(
     ChangeNotifierProvider(
       child: const AdvisorApp(),

@@ -15,8 +15,10 @@ const String cacheFailureMessage = 'Something went wrong, please try again';
 const String generalFailureMessage = 'An error has occured, please try again';
 
 class AdvisorCubit extends Cubit<AdvisorStateCubit> {
-  AdvisorCubit() : super(AdvisorInitial());
-  final AdviceUseCases adviceUseCases = AdviceUseCases();
+  AdvisorCubit({
+    required this.adviceUseCases,
+  }) : super(AdvisorInitial());
+  final AdviceUseCases adviceUseCases;
 
   Future<void> adviceRequested() async {
     emit(AdvisorStateLoading());

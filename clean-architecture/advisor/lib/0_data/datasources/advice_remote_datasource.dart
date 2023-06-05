@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:advisor/0_data/exceptions/exceptions.dart';
@@ -12,7 +13,10 @@ abstract class AdviceRemoteDatasource {
 }
 
 class AdviceRemoteDatasourceImpl implements AdviceRemoteDatasource {
-  final client = http.Client();
+  final http.Client client;
+  AdviceRemoteDatasourceImpl({
+    required this.client,
+  });
 
   @override
   Future<AdviceModel> getRandomAdviceFromApi() async {
