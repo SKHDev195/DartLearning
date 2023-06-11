@@ -8,9 +8,13 @@ abstract class AdvisorStateCubit extends Equatable {
   List<Object> get props => [];
 }
 
-class AdvisorInitial extends AdvisorStateCubit {}
+class AdvisorInitial extends AdvisorStateCubit {
+  const AdvisorInitial();
+}
 
-class AdvisorStateLoading extends AdvisorStateCubit {}
+class AdvisorStateLoading extends AdvisorStateCubit {
+  const AdvisorStateLoading();
+}
 
 class AdvisorStateLoaded extends AdvisorStateCubit {
   const AdvisorStateLoaded({
