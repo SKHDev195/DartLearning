@@ -17,11 +17,11 @@ const String generalFailureMessage = 'An error has occured, please try again';
 class AdvisorCubit extends Cubit<AdvisorStateCubit> {
   AdvisorCubit({
     required this.adviceUseCases,
-  }) : super(AdvisorInitial());
+  }) : super(const AdvisorInitial());
   final AdviceUseCases adviceUseCases;
 
   Future<void> adviceRequested() async {
-    emit(AdvisorStateLoading());
+    emit(const AdvisorStateLoading());
     final failureOrAdvice = await adviceUseCases.getAdvice();
 
     failureOrAdvice.fold(
