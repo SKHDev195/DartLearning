@@ -12,6 +12,5 @@ class AdviceUseCases {
 
   Future<Either<Failure, AdviceEntity>> getAdvice() async {
     return adviceRepo.getAdviceFromDataSource();
-    // space for logic
   }
 }

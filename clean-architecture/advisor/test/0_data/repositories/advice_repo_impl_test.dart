@@ -69,7 +69,7 @@ void main() {
 
         expect(result.isLeft(), true);
         expect(result.isRight(), false);
-        expect(result, Left<Failure, AdviceEntity>(ServerFailure()));
+        expect(result, Left<Failure, AdviceEntity>(GeneralFailure()));
       });
     });
   });
