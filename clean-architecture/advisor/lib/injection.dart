@@ -1,6 +1,5 @@
 import 'package:advisor/0_data/datasources/advice_remote_datasource.dart';
 import 'package:advisor/0_data/repositories/advice_repo_impl.dart';
-import 'package:advisor/1_domain/repositories/advice_repo.dart';
 import 'package:advisor/1_domain/usecases/advice_usecase.dart';
 import 'package:advisor/2_application/pages/advice/cubit/advisor_cubit.dart';
 import 'package:get_it/get_it.dart';
