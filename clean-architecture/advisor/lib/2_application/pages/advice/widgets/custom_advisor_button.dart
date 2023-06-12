@@ -16,7 +16,9 @@ class CustomAdvisorButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: themeData.colorScheme.secondary),
+              color: onTap == null
+                  ? Colors.grey
+                  : themeData.colorScheme.secondary),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             child: Text(
