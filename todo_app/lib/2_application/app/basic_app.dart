@@ -12,6 +12,7 @@ class ToDoApp extends StatelessWidget {
         ...GlobalMaterialLocalizations.delegates,
         GlobalWidgetsLocalizations.delegate,
       ],
+      routerConfig: ,
       themeMode: ThemeMode.system,
       theme: ThemeData.from(
         useMaterial3: true,
