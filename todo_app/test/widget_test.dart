@@ -6,6 +6,6 @@ import 'package:todo_app/2_application/app/basic_app.dart';
 void main() {
   testWidgets('BasicApp smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const BasicApp());
+    await tester.pumpWidget(const ToDoApp());
   });
 }
