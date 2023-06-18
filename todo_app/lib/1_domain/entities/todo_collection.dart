@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:todo_app/1_domain/entities/todo_color.dart';
 import 'package:todo_app/1_domain/entities/unique_id.dart';
 
-class ToDoCollection {
+class ToDoCollection extends Equatable {
   ToDoCollection({
     required this.id,
     required this.title,
@@ -21,4 +22,11 @@ class ToDoCollection {
   final CollectionId id;
   final String title;
   final ToDoColor todoColor;
+
+  @override
+  List<Object?> get props => [
+        id,
+        title,
+        todoColor,
+      ];
 }
