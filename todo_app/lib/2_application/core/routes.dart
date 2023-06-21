@@ -29,6 +29,7 @@ final routes = GoRouter(
         return const SettingsPage();
       },
     ),
+    GoRoute(path: path)
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) => child,
