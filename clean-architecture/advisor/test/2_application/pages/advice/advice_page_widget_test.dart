@@ -44,10 +44,10 @@ void main() {
           await widgetTester
               .pumpWidget(widgetUnderTest(cubit: mockAdvisorCubit));
 
-          final advicerInitalTextFinder =
+          final advisorInitalTextFinder =
               find.text('Your advice is waiting for you!');
 
-          expect(advicerInitalTextFinder, findsOneWidget);
+          expect(advisorInitalTextFinder, findsOneWidget);
         },
       );
 
@@ -65,9 +65,9 @@ void main() {
 
           await widgetTester.pump();
 
-          final advicerLoadingFinder = find.byType(CircularProgressIndicator);
+          final advisorLoadingFinder = find.byType(CircularProgressIndicator);
 
-          expect(advicerLoadingFinder, findsOneWidget);
+          expect(advisorLoadingFinder, findsOneWidget);
         },
       );
 

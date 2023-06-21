@@ -1,4 +1,4 @@
-part of 'todo_overview_cubit_cubit.dart';
+part of 'todo_overview_cubit.dart';
 
 @immutable
 abstract class ToDoOverviewCubitState extends Equatable {
