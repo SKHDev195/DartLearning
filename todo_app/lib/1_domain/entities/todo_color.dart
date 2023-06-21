@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class ToDoColor {
+class ToDoColor extends Equatable {
   ToDoColor({
     required this.colorIndex,
   });
@@ -19,4 +20,7 @@ class ToDoColor {
   ];
 
   Color get color => predefinedColors[colorIndex];
+
+  @override
+  List<Object?> get props => [colorIndex];
 }

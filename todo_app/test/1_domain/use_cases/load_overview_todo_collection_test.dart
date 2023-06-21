@@ -36,7 +36,7 @@ void main() {
           ),
         );
         final result = await loadOverviewToDoCollectionsTest.call(
-          MockNoParams(),
+          NoParams(),
         );
 
         expect(result.isLeft, false);
@@ -63,7 +63,7 @@ void main() {
         );
 
         final result = await loadOverviewToDoCollectionsTest.call(
-          MockNoParams(),
+          NoParams(),
         );
 
         expect(result.isLeft, true);
