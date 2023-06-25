@@ -18,7 +18,7 @@ class ToDoDetailCubit extends Cubit<ToDoDetailCubitState> {
   final LoadToDoEntryIdsForCollection loadToDoEntryIdsForCollection;
 
   Future<void> fetch() async {
-    emit(ToDoDetailCubitLoadingState());
+    emit(const ToDoDetailCubitLoadingState());
 
     try {
       final entryIds = await loadToDoEntryIdsForCollection.call(
