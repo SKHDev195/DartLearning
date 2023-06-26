@@ -1,14 +1,15 @@
+import 'package:equatable/equatable.dart';
 import 'package:todo_app/1_domain/entities/unique_id.dart';
 
-class ToDoEntry {
-  const ToDoEntry({
+class ToDoEntry extends Equatable {
+  ToDoEntry({
     required this.id,
     required this.isDone,
     required this.description,
   });
 
   final String description;
-  final bool isDone;
+  bool isDone;
   final EntryId id;
 
   factory ToDoEntry.empty() {
@@ -18,4 +19,19 @@ class ToDoEntry {
       description: '',
     );
   }
+
+  ToDoEntry copyWith({String? description, bool? isDone}) {
+    return ToDoEntry(
+      id: id,
+      isDone: isDone ?? this.isDone,
+      description: description ?? this.description,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        id,
+        isDone,
+        description,
+      ];
 }

@@ -1,4 +1,4 @@
-import 'package:either_dart/src/either.dart';
+import 'package:either_dart/either.dart';
 import 'package:todo_app/1_domain/entities/todo_collection.dart';
 import 'package:todo_app/1_domain/entities/todo_color.dart';
 import 'package:todo_app/1_domain/entities/todo_entry.dart';
@@ -88,5 +88,26 @@ class ToDoRepositoryMock implements ToDoRepository {
         ),
       );
     }
+  }
+
+  @override
+  Future<Either<Failure, ToDoEntry>> updateToDoEntry(
+      {required CollectionId collectionId, required EntryId entryId}) {
+    final index = toDoEntries.indexWhere(
+      (element) => element.id == entryId,
+    );
+
+    final entryToUpdate = toDoEntries[index];
+
+    final updatedEntry = toDoEntries[index].copyWith(
+      isDone: !entryToUpdate.isDone,
+    );
+
+    toDoEntries[index] = updatedEntry;
+
+    return Future.delayed(
+      const Duration(milliseconds: 100),
+      () => Right(updatedEntry),
+    );
   }
 }
