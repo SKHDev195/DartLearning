@@ -40,6 +40,7 @@ class ToDoEntryItemCubit extends Cubit<ToDoEntryItemCubitState> {
             toDoEntry: toDoEntry.right,
           ),
         ),
+        /*emit(ToDoEntryItemCubitLoadingState())*/
       );
     } on Exception {
       emit(ToDoEntryItemCubitErrorState());
