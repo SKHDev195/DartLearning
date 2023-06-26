@@ -13,10 +13,15 @@ class ToDoEntryItemLoaded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-      title: Text(toDoEntry.description),
-      value: toDoEntry.isDone,
-      onChanged: onChanged,
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height * 0.03,
+      ),
+      child: CheckboxListTile(
+        title: Text(toDoEntry.description),
+        value: toDoEntry.isDone,
+        onChanged: onChanged,
+      ),
     );
   }
 }
