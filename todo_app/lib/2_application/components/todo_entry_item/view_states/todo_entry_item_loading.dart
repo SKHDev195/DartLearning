@@ -10,9 +10,6 @@ class ToDoEntryItemLoading extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: Shimmer(
