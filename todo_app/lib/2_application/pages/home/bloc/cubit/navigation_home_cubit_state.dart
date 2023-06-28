@@ -1,7 +1,7 @@
 part of 'navigation_todo_cubit.dart';
 
 @immutable
-abstract class NavigationToDoCubitState extends Equatable {
+class NavigationToDoCubitState extends Equatable {
   const NavigationToDoCubitState({
     this.selectedCollectionId,
     this.isSecondBodyDisplayed,
@@ -17,4 +17,4 @@ abstract class NavigationToDoCubitState extends Equatable {
       ];
 }
 
-class NavigationToDoCubitInitial extends NavigationToDoCubitState {}
+class NavigationToDoCubitStateInitial extends NavigationToDoCubitState {}

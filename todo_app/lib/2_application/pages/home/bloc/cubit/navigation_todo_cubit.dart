@@ -6,5 +6,11 @@ import 'package:todo_app/1_domain/entities/unique_id.dart';
 part 'navigation_home_cubit_state.dart';
 
 class NavigationToDoCubit extends Cubit<NavigationToDoCubitState> {
-  NavigationToDoCubit() : super(NavigationToDoCubitInitial());
+  NavigationToDoCubit() : super(NavigationToDoCubitStateInitial());
+
+  void selectedToDoCollectionChanged(CollectionId collectionId) {
+    emit(
+      NavigationToDoCubitState(selectedCollectionId: collectionId),
+    );
+  }
 }
