@@ -131,8 +131,27 @@ class _HomePageState extends State<HomePage> {
                 key: const Key('secondary-body-medium'),
                 builder: widget.index != 1
                     ? null
-                    : (_) => ToDoDetailPageProvider(
-                          collectionId: CollectionId(),
+                    : (_) => BlocBuilder<NavigationToDoCubit,
+                            NavigationToDoCubitState>(
+                          builder: (context, state) {
+                            final selectedId = state.selectedCollectionId;
+                            final isSecondBodyDisplayed =
+                                Breakpoints.mediumAndUp.isActive(context);
+                            context
+                                .read<NavigationToDoCubit>()
+                                .secondBodyHasChanged(isSecondBodyDisplayed);
+
+                            if (selectedId == null) {
+                              return const Placeholder();
+                            } else {
+                              return ToDoDetailPageProvider(
+                                key: Key(
+                                  selectedId.value,
+                                ),
+                                collectionId: selectedId,
+                              );
+                            }
+                          },
                         ),
               ),
             },
