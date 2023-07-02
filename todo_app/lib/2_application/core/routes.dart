@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/1_domain/entities/unique_id.dart';
 import 'package:todo_app/2_application/core/go_router_observer.dart';
 import 'package:todo_app/2_application/pages/dashboard/dashboard_page.dart';
 import 'package:todo_app/2_application/pages/detail/todo_detail_page.dart';
+import 'package:todo_app/2_application/pages/home/bloc/cubit/navigation_todo_cubit.dart';
 import 'package:todo_app/2_application/pages/home/home_page.dart';
 import 'package:todo_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_app/2_application/pages/settings/settings_page.dart';
@@ -35,25 +37,34 @@ final routes = GoRouter(
       name: ToDoDetailPage.pageConfig.name,
       path: '$_basePath/overview/:collectionId',
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('details'),
-            leading: BackButton(
-              onPressed: () {
-                if (context.canPop()) {
-                  context.pop();
-                } else {
-                  context.pushNamed(
-                    HomePage.pageConfig.name,
-                    pathParameters: {'tab': OverviewPage.pageConfig.name},
-                  );
-                }
-              },
+        return BlocListener<NavigationToDoCubit, NavigationToDoCubitState>(
+          listenWhen: (previous, current) =>
+              previous.isSecondBodyDisplayed != current.isSecondBodyDisplayed,
+          listener: (context, state) {
+            if (context.canPop() && (state.isSecondBodyDisplayed ?? false)) {
+              context.pop();
+            }
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('details'),
+              leading: BackButton(
+                onPressed: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.pushNamed(
+                      HomePage.pageConfig.name,
+                      pathParameters: {'tab': OverviewPage.pageConfig.name},
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-          body: ToDoDetailPageProvider(
-            collectionId: CollectionId.fromUniqueString(
-              state.pathParameters['collectionId'] ?? '',
+            body: ToDoDetailPageProvider(
+              collectionId: CollectionId.fromUniqueString(
+                state.pathParameters['collectionId'] ?? '',
+              ),
             ),
           ),
         );
