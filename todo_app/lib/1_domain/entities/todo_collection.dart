@@ -23,6 +23,14 @@ class ToDoCollection extends Equatable {
   final String title;
   final ToDoColor todoColor;
 
+  ToDoCollection copyWith({String? title, ToDoColor? todoColor}) {
+    return ToDoCollection(
+      id: id,
+      title: title ?? this.title,
+      todoColor: todoColor ?? this.todoColor,
+    );
+  }
+
   @override
   List<Object?> get props => [
         id,
