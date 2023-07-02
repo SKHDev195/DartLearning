@@ -139,7 +139,9 @@ class _HomePageState extends State<HomePage> {
                                 Breakpoints.mediumAndUp.isActive(context);
                             context
                                 .read<NavigationToDoCubit>()
-                                .secondBodyHasChanged(isSecondBodyDisplayed);
+                                .secondBodyHasChanged(
+                                  isSecondBodyDisplayed: isSecondBodyDisplayed,
+                                );
 
                             if (selectedId == null) {
                               return const Placeholder();
