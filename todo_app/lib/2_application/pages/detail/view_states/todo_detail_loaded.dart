@@ -19,47 +19,35 @@ class ToDoDetailLoaded extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: entryIds.length,
-          itemBuilder: (context, index) {
-            if (index == entryIds.length - 1) {
-              return Column(
-                children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.pushNamed(
-                        CreateToDoEntryPage.pageConfig.name,
-                        pathParameters: {
-                          'collectionId': collectionId.value.toString(),
-                        },
-                      );
-                    },
-                    child: const Text('Add New Entry'),
-                  ),
-                ],
-              );
-            } else {
-              return ToDoEntryItemProvider(
+        child: Stack(
+          children: [
+            ListView.builder(
+              itemCount: entryIds.length,
+              itemBuilder: (context, index) => ToDoEntryItemProvider(
                 collectionId: collectionId,
                 entryId: entryIds[index],
-              );
-            }
-          },
-          /*itemBuilder: (context, index) => ToDoEntryItemProvider(
-            collectionId: collectionId,
-            entryId: entryIds[index],
-          ),*/
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: FloatingActionButton(
+                  key: const Key('create-todo-entry'),
+                  onPressed: () {
+                    context.pushNamed(
+                      CreateToDoEntryPage.pageConfig.name,
+                      extra: collectionId,
+                    );
+                  },
+                  child: const Icon(
+                    Icons.add_rounded,
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
-        /*const SizedBox(
-          height: 16,
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Add New Entry'),
-        ),*/
       ),
     );
   }

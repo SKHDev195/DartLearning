@@ -6,10 +6,10 @@ class CreateToDoEntryPageCubitState extends Equatable {
     this.description,
   });
 
-  final String? description;
+  final FormValue<String?>? description;
 
   CreateToDoEntryPageCubitState copyWith({
-    String? description,
+    FormValue<String?>? description,
   }) {
     return CreateToDoEntryPageCubitState(
       description: description ?? this.description,

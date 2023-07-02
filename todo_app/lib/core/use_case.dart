@@ -60,13 +60,13 @@ class ToDoCollectionParams extends Params {
 
 class ToDoEntryParams extends Params {
   ToDoEntryParams({
-    required this.description,
+    required this.entry,
   }) : super();
 
-  final String description;
+  final ToDoEntry entry;
 
   @override
   List<Object?> get props => [
-        description,
+        entry,
       ];
 }

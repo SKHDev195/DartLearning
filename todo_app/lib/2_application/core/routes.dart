@@ -36,6 +36,32 @@ final routes = GoRouter(
       },
     ),
     GoRoute(
+      name: CreateToDoEntryPage.pageConfig.name,
+      path: '$_basePath/overview/${CreateToDoEntryPage.pageConfig.name}',
+      builder: (context, state) => Scaffold(
+        appBar: AppBar(
+          title: const Text('New Entry'),
+          leading: BackButton(
+            onPressed: () {
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.pushNamed(
+                  HomePage.pageConfig.name,
+                  pathParameters: {'tab': OverviewPage.pageConfig.name},
+                );
+              }
+            },
+          ),
+        ),
+        body: SafeArea(
+          child: CreateToDoEntryPageProvider(
+            collectionId: state.extra as CollectionId,
+          ),
+        ),
+      ),
+    ),
+    GoRoute(
       path: '$_basePath/overview/${CreateToDoCollectionPage.pageConfig.name}',
       name: CreateToDoCollectionPage.pageConfig.name,
       builder: (context, state) => Scaffold(
@@ -95,31 +121,6 @@ final routes = GoRouter(
           ),
         );
       },
-    ),
-    GoRoute(
-      name: CreateToDoEntryPage.pageConfig.name,
-      path:
-          '$_basePath/overview/:collectionId/${CreateToDoEntryPage.pageConfig.name}',
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(
-          title: const Text('New Entry'),
-          leading: BackButton(
-            onPressed: () {
-              if (context.canPop()) {
-                context.pop();
-              } else {
-                context.pushNamed(
-                  HomePage.pageConfig.name,
-                  pathParameters: {'tab': OverviewPage.pageConfig.name},
-                );
-              }
-            },
-          ),
-        ),
-        body: SafeArea(
-          child: CreateToDoEntryPage.pageConfig.child,
-        ),
-      ),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,

@@ -20,14 +20,6 @@ class ToDoEntry extends Equatable {
     );
   }
 
-  factory ToDoEntry.fromForm(String description) {
-    return ToDoEntry(
-      id: EntryId(),
-      isDone: false,
-      description: description,
-    );
-  }
-
   ToDoEntry copyWith({String? description, bool? isDone}) {
     return ToDoEntry(
       id: id,
