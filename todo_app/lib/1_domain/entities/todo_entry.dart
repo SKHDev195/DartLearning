@@ -2,29 +2,32 @@ import 'package:equatable/equatable.dart';
 import 'package:todo_app/1_domain/entities/unique_id.dart';
 
 class ToDoEntry extends Equatable {
-  ToDoEntry({
-    required this.id,
-    required this.isDone,
-    required this.description,
-  });
-
   final String description;
-  bool isDone;
+  final bool isDone;
   final EntryId id;
+
+  const ToDoEntry({
+    required this.id,
+    required this.description,
+    required this.isDone,
+  });
 
   factory ToDoEntry.empty() {
     return ToDoEntry(
       id: EntryId(),
-      isDone: false,
       description: '',
+      isDone: false,
     );
   }
 
-  ToDoEntry copyWith({String? description, bool? isDone}) {
+  ToDoEntry copyWith({
+    String? description,
+    bool? isDone,
+  }) {
     return ToDoEntry(
       id: id,
-      isDone: isDone ?? this.isDone,
       description: description ?? this.description,
+      isDone: isDone ?? this.isDone,
     );
   }
 

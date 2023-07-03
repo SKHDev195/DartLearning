@@ -22,10 +22,10 @@ class CreateToDoEntryPageCubit extends Cubit<CreateToDoEntryPageCubitState> {
   void descriptionChanged(String? description) {
     ValidationStatus currentStatus = ValidationStatus.pending;
 
-    if (description == null || description.isEmpty || description.length < 2) {
+    if (description == null || description.isEmpty || description.length < 1) {
       currentStatus = ValidationStatus.error;
     } else {
-      ValidationStatus.success;
+      currentStatus = ValidationStatus.success;
     }
 
     emit(
@@ -38,5 +38,13 @@ class CreateToDoEntryPageCubit extends Cubit<CreateToDoEntryPageCubitState> {
     );
   }
 
-  Future<void> submit() async {}
+  Future<void> submit() async {
+    await createToDoEntry.call(
+      ToDoEntryParams(
+        entry: ToDoEntry.empty().copyWith(
+          description: state.description?.value,
+        ),
+      ),
+    );
+  }
 }

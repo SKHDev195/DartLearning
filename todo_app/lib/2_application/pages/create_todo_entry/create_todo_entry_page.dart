@@ -8,7 +8,7 @@ import 'package:todo_app/2_application/core/form_value.dart';
 import 'package:todo_app/2_application/core/page_config.dart';
 import 'package:todo_app/2_application/pages/create_todo_entry/bloc/cubit/create_to_do_entry_page_cubit.dart';
 
-class CreateToDoEntryPageProvider extends StatefulWidget {
+class CreateToDoEntryPageProvider extends StatelessWidget {
   const CreateToDoEntryPageProvider({
     super.key,
     required this.collectionId,
@@ -17,30 +17,21 @@ class CreateToDoEntryPageProvider extends StatefulWidget {
   final CollectionId collectionId;
 
   @override
-  State<CreateToDoEntryPageProvider> createState() =>
-      _CreateToDoEntryPageProviderState();
-}
-
-class _CreateToDoEntryPageProviderState
-    extends State<CreateToDoEntryPageProvider> {
-  final _formKey = GlobalKey<FormState>();
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider<CreateToDoEntryPageCubit>(
       create: (context) => CreateToDoEntryPageCubit(
-        collectionId: widget.collectionId,
+        collectionId: collectionId,
         createToDoEntry: CreateToDoEntry(
           toDoRepository: RepositoryProvider.of<ToDoRepository>(context),
         ),
       ),
-      child: CreateToDoEntryPage(),
+      child: const CreateToDoEntryPage(),
     );
   }
 }
 
-class CreateToDoEntryPage extends StatelessWidget {
-  CreateToDoEntryPage({
+class CreateToDoEntryPage extends StatefulWidget {
+  const CreateToDoEntryPage({
     super.key,
   });
 
@@ -50,6 +41,11 @@ class CreateToDoEntryPage extends StatelessWidget {
     child: Placeholder(),
   );
 
+  @override
+  State<CreateToDoEntryPage> createState() => _CreateToDoEntryPageState();
+}
+
+class _CreateToDoEntryPageState extends State<CreateToDoEntryPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
