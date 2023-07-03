@@ -74,11 +74,16 @@ class ToDoRepositoryMock implements ToDoRepository {
       if (toDoEntries.length < endIndex) {
         endIndex = toDoEntries.length;
       }
-      final entryIds = toDoEntries
-          .sublist(startIndex, endIndex)
-          .map((entry) => entry.id)
-          .toList()
-          .cast<EntryId>();
+
+      List<EntryId> entryIds = [];
+
+      if (startIndex < toDoEntries.length) {
+        entryIds = toDoEntries
+            .sublist(startIndex, endIndex)
+            .map((entry) => entry.id)
+            .toList()
+            .cast<EntryId>();
+      }
 
       return Future.delayed(
         const Duration(milliseconds: 200),
