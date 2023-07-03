@@ -8,13 +8,27 @@ import 'package:todo_app/2_application/core/form_value.dart';
 import 'package:todo_app/2_application/core/page_config.dart';
 import 'package:todo_app/2_application/pages/create_todo_entry/bloc/cubit/create_to_do_entry_page_cubit.dart';
 
+typedef ToDoEntryItemAddedCallback = Function();
+
+class CreateToDoEntryPageExtra {
+  const CreateToDoEntryPageExtra({
+    required this.collectionId,
+    required this.toDoEntryItemAddedCallback,
+  });
+
+  final CollectionId collectionId;
+  final ToDoEntryItemAddedCallback toDoEntryItemAddedCallback;
+}
+
 class CreateToDoEntryPageProvider extends StatelessWidget {
   const CreateToDoEntryPageProvider({
     super.key,
     required this.collectionId,
+    required this.toDoEntryItemAddedCallback,
   });
 
   final CollectionId collectionId;
+  final ToDoEntryItemAddedCallback toDoEntryItemAddedCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +39,9 @@ class CreateToDoEntryPageProvider extends StatelessWidget {
           toDoRepository: RepositoryProvider.of<ToDoRepository>(context),
         ),
       ),
-      child: const CreateToDoEntryPage(),
+      child: CreateToDoEntryPage(
+        toDoEntryItemAddedCallback: toDoEntryItemAddedCallback,
+      ),
     );
   }
 }
@@ -33,7 +49,10 @@ class CreateToDoEntryPageProvider extends StatelessWidget {
 class CreateToDoEntryPage extends StatefulWidget {
   const CreateToDoEntryPage({
     super.key,
+    required this.toDoEntryItemAddedCallback,
   });
+
+  final ToDoEntryItemAddedCallback toDoEntryItemAddedCallback;
 
   static const pageConfig = PageConfig(
     icon: Icons.task_alt_rounded,
@@ -89,6 +108,7 @@ class _CreateToDoEntryPageState extends State<CreateToDoEntryPage> {
 
                 if (isValid == true) {
                   context.read<CreateToDoEntryPageCubit>().submit();
+                  widget.toDoEntryItemAddedCallback.call();
                   context.pop();
                 }
               },
