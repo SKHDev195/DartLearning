@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                 key: const Key('primary-navigation-medium'),
                 builder: (context) => AdaptiveScaffold.standardNavigationRail(
                   leading: IconButton(
+                    key: const Key('create-todo-collection'),
                     onPressed: () {
                       context.pushNamed(
                         CreateToDoCollectionPage.pageConfig.name,
@@ -89,6 +90,7 @@ class _HomePageState extends State<HomePage> {
                     tooltip: 'Add Collection',
                   ),
                   trailing: IconButton(
+                    key: const Key('open-settings'),
                     onPressed: () =>
                         context.pushNamed(SettingsPage.pageConfig.name),
                     icon: Icon(SettingsPage.pageConfig.icon),
