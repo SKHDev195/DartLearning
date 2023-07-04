@@ -8,41 +8,51 @@ import 'package:todo_app/2_application/core/form_value.dart';
 import 'package:todo_app/2_application/core/page_config.dart';
 import 'package:todo_app/2_application/pages/create_todo_entry/bloc/cubit/create_to_do_entry_page_cubit.dart';
 
-class CreateToDoEntryPageProvider extends StatefulWidget {
-  const CreateToDoEntryPageProvider({
-    super.key,
+typedef ToDoEntryItemAddedCallback = Function();
+
+class CreateToDoEntryPageExtra {
+  const CreateToDoEntryPageExtra({
     required this.collectionId,
+    required this.toDoEntryItemAddedCallback,
   });
 
   final CollectionId collectionId;
-
-  @override
-  State<CreateToDoEntryPageProvider> createState() =>
-      _CreateToDoEntryPageProviderState();
+  final ToDoEntryItemAddedCallback toDoEntryItemAddedCallback;
 }
 
-class _CreateToDoEntryPageProviderState
-    extends State<CreateToDoEntryPageProvider> {
-  final _formKey = GlobalKey<FormState>();
+class CreateToDoEntryPageProvider extends StatelessWidget {
+  const CreateToDoEntryPageProvider({
+    super.key,
+    required this.collectionId,
+    required this.toDoEntryItemAddedCallback,
+  });
+
+  final CollectionId collectionId;
+  final ToDoEntryItemAddedCallback toDoEntryItemAddedCallback;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CreateToDoEntryPageCubit>(
       create: (context) => CreateToDoEntryPageCubit(
-        collectionId: widget.collectionId,
+        collectionId: collectionId,
         createToDoEntry: CreateToDoEntry(
           toDoRepository: RepositoryProvider.of<ToDoRepository>(context),
         ),
       ),
-      child: CreateToDoEntryPage(),
+      child: CreateToDoEntryPage(
+        toDoEntryItemAddedCallback: toDoEntryItemAddedCallback,
+      ),
     );
   }
 }
 
-class CreateToDoEntryPage extends StatelessWidget {
-  CreateToDoEntryPage({
+class CreateToDoEntryPage extends StatefulWidget {
+  const CreateToDoEntryPage({
     super.key,
+    required this.toDoEntryItemAddedCallback,
   });
+
+  final ToDoEntryItemAddedCallback toDoEntryItemAddedCallback;
 
   static const pageConfig = PageConfig(
     icon: Icons.task_alt_rounded,
@@ -50,6 +60,11 @@ class CreateToDoEntryPage extends StatelessWidget {
     child: Placeholder(),
   );
 
+  @override
+  State<CreateToDoEntryPage> createState() => _CreateToDoEntryPageState();
+}
+
+class _CreateToDoEntryPageState extends State<CreateToDoEntryPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -93,6 +108,7 @@ class CreateToDoEntryPage extends StatelessWidget {
 
                 if (isValid == true) {
                   context.read<CreateToDoEntryPageCubit>().submit();
+                  widget.toDoEntryItemAddedCallback.call();
                   context.pop();
                 }
               },

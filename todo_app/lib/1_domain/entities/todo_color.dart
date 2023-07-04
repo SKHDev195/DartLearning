@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class ToDoColor extends Equatable {
-  ToDoColor({
+  const ToDoColor({
     required this.colorIndex,
   });
 
