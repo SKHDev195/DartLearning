@@ -19,6 +19,7 @@ class ToDoOverviewCubitLoadedState extends ToDoOverviewCubitState {
 
   final List<ToDoCollection> collections;
 
+  @override
   List<Object> get props => [
         collections,
       ];

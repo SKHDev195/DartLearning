@@ -27,7 +27,7 @@ void main() {
     (index) => ToDoCollection(
       id: CollectionId.fromUniqueString('test'),
       title: 'test collection',
-      todoColor: ToDoColor(
+      todoColor: const ToDoColor(
         colorIndex: 0,
       ),
     ),
