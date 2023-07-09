@@ -1,4 +1,3 @@
-import 'package:advisor/1_domain/entities/advice_entity.dart';
 import 'package:advisor/1_domain/failures/failures.dart';
 import 'package:advisor/1_domain/usecases/advice_usecase.dart';
 import 'package:bloc/bloc.dart';

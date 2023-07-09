@@ -1,7 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:test/test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:advisor/2_application/pages/advice/bloc/advisor_bloc.dart';
 
 void main() {
