@@ -15,6 +15,7 @@ class CreateToDoEntry implements UseCase<bool, ToDoEntryParams> {
   Future<Either<Failure, bool>> call(params) async {
     try {
       final result = toDoRepository.createToDoEntry(
+        params.collectionId,
         params.entry,
       );
 
