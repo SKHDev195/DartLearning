@@ -71,110 +71,104 @@ class _HomePageState extends State<HomePage> {
     final theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
-        child: AdaptiveLayout(
-          primaryNavigation: SlotLayout(
-            config: <Breakpoint, SlotLayoutConfig>{
-              Breakpoints.mediumAndUp: SlotLayout.from(
-                key: const Key('primary-navigation-medium'),
-                builder: (context) => AdaptiveScaffold.standardNavigationRail(
-                  leading: IconButton(
-                    key: const Key('create-todo-collection'),
-                    onPressed: () async {
-                      final result = await context.pushNamed(
-                        CreateToDoCollectionPage.pageConfig.name,
-                      );
-
-                      if (result == true) {
-                        debugPrint('item was created successfully');
-                      }
-                    },
-                    icon: Icon(
-                      CreateToDoCollectionPage.pageConfig.icon,
+        child: BlocListener<NavigationToDoCubit, NavigationToDoCubitState>(
+          listener: (context, state) {
+            if (context.canPop() && (state.isSecondBodyDisplayed ?? false)) {
+              context.pop();
+            }
+          },
+          listenWhen: (previous, current) =>
+              previous.isSecondBodyDisplayed != current.isSecondBodyDisplayed,
+          child: AdaptiveLayout(
+            primaryNavigation: SlotLayout(
+              config: <Breakpoint, SlotLayoutConfig>{
+                Breakpoints.mediumAndUp: SlotLayout.from(
+                  key: const Key('primary-navigation-medium'),
+                  builder: (context) => AdaptiveScaffold.standardNavigationRail(
+                    trailing: IconButton(
+                      key: const Key('open-settings'),
+                      onPressed: () =>
+                          context.pushNamed(SettingsPage.pageConfig.name),
+                      icon: Icon(SettingsPage.pageConfig.icon),
                     ),
-                    tooltip: 'Add Collection',
-                  ),
-                  trailing: IconButton(
-                    key: const Key('open-settings'),
-                    onPressed: () =>
-                        context.pushNamed(SettingsPage.pageConfig.name),
-                    icon: Icon(SettingsPage.pageConfig.icon),
-                  ),
-                  destinations: destinations
-                      .map(
-                        (destination) => AdaptiveScaffold.toRailDestination(
-                          destination,
-                        ),
-                      )
-                      .toList(),
-                  onDestinationSelected: (index) =>
-                      _tapOnNavigationDesination(context, index),
-                  selectedIndex: widget.index,
-                  selectedLabelTextStyle: TextStyle(
-                    color: theme.colorScheme.onBackground,
-                  ),
-                  selectedIconTheme: IconThemeData(
-                    color: theme.colorScheme.onBackground,
-                  ),
-                  unselectedIconTheme: IconThemeData(
-                    color: theme.colorScheme.onBackground.withOpacity(0.5),
+                    destinations: destinations
+                        .map(
+                          (destination) => AdaptiveScaffold.toRailDestination(
+                            destination,
+                          ),
+                        )
+                        .toList(),
+                    onDestinationSelected: (index) =>
+                        _tapOnNavigationDesination(context, index),
+                    selectedIndex: widget.index,
+                    selectedLabelTextStyle: TextStyle(
+                      color: theme.colorScheme.onBackground,
+                    ),
+                    selectedIconTheme: IconThemeData(
+                      color: theme.colorScheme.onBackground,
+                    ),
+                    unselectedIconTheme: IconThemeData(
+                      color: theme.colorScheme.onBackground.withOpacity(0.5),
+                    ),
                   ),
                 ),
-              ),
-            },
-          ),
-          bottomNavigation: SlotLayout(
-            config: <Breakpoint, SlotLayoutConfig>{
-              Breakpoints.small: SlotLayout.from(
-                key: const Key('bottom-navigation-small'),
-                builder: (_) => AdaptiveScaffold.standardBottomNavigationBar(
-                  destinations: destinations,
-                  currentIndex: widget.index,
-                  onDestinationSelected: (value) =>
-                      _tapOnNavigationDesination(context, value),
+              },
+            ),
+            bottomNavigation: SlotLayout(
+              config: <Breakpoint, SlotLayoutConfig>{
+                Breakpoints.small: SlotLayout.from(
+                  key: const Key('bottom-navigation-small'),
+                  builder: (_) => AdaptiveScaffold.standardBottomNavigationBar(
+                    destinations: destinations,
+                    currentIndex: widget.index,
+                    onDestinationSelected: (value) =>
+                        _tapOnNavigationDesination(context, value),
+                  ),
                 ),
-              ),
-            },
-          ),
-          body: SlotLayout(
-            config: <Breakpoint, SlotLayoutConfig>{
-              Breakpoints.smallAndUp: SlotLayout.from(
-                key: const Key('primary-body-small'),
-                builder: (_) => HomePage.tabs[widget.index].child,
-              ),
-            },
-          ),
-          secondaryBody: SlotLayout(
-            config: <Breakpoint, SlotLayoutConfig>{
-              Breakpoints.mediumAndUp: SlotLayout.from(
-                key: const Key('secondary-body-medium'),
-                builder: widget.index != 1
-                    ? null
-                    : (_) => BlocBuilder<NavigationToDoCubit,
-                            NavigationToDoCubitState>(
-                          builder: (context, state) {
-                            final selectedId = state.selectedCollectionId;
-                            final isSecondBodyDisplayed =
-                                Breakpoints.mediumAndUp.isActive(context);
-                            context
-                                .read<NavigationToDoCubit>()
-                                .secondBodyHasChanged(
-                                  isSecondBodyDisplayed: isSecondBodyDisplayed,
-                                );
+              },
+            ),
+            body: SlotLayout(
+              config: <Breakpoint, SlotLayoutConfig>{
+                Breakpoints.smallAndUp: SlotLayout.from(
+                  key: const Key('primary-body-small'),
+                  builder: (_) => HomePage.tabs[widget.index].child,
+                ),
+              },
+            ),
+            secondaryBody: SlotLayout(
+              config: <Breakpoint, SlotLayoutConfig>{
+                Breakpoints.mediumAndUp: SlotLayout.from(
+                  key: const Key('secondary-body-medium'),
+                  builder: widget.index != 1
+                      ? null
+                      : (_) => BlocBuilder<NavigationToDoCubit,
+                              NavigationToDoCubitState>(
+                            builder: (context, state) {
+                              final selectedId = state.selectedCollectionId;
+                              final isSecondBodyDisplayed =
+                                  Breakpoints.mediumAndUp.isActive(context);
+                              context
+                                  .read<NavigationToDoCubit>()
+                                  .secondBodyHasChanged(
+                                    isSecondBodyDisplayed:
+                                        isSecondBodyDisplayed,
+                                  );
 
-                            if (selectedId == null) {
-                              return const Placeholder();
-                            } else {
-                              return ToDoDetailPageProvider(
-                                key: Key(
-                                  selectedId.value,
-                                ),
-                                collectionId: selectedId,
-                              );
-                            }
-                          },
-                        ),
-              ),
-            },
+                              if (selectedId == null) {
+                                return const Placeholder();
+                              } else {
+                                return ToDoDetailPageProvider(
+                                  key: Key(
+                                    selectedId.value,
+                                  ),
+                                  collectionId: selectedId,
+                                );
+                              }
+                            },
+                          ),
+                ),
+              },
+            ),
           ),
         ),
       ),
