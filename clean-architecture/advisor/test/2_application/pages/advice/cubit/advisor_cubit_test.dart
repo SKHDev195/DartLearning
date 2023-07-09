@@ -4,7 +4,6 @@ import 'package:advisor/1_domain/usecases/advice_usecase.dart';
 import 'package:advisor/2_application/pages/advice/cubit/advisor_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:mockito/annotations.dart';
 import 'package:test/test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -22,7 +21,7 @@ void main() {
           '[AdvisorStateLoading, AdvisorStateLoaded] when adviceRequested() is called',
           setUp: () => when(() => mockAdviceUseCases.getAdvice()).thenAnswer(
                 (invocation) => Future.value(
-                  Right<Failure, AdviceEntity>(
+                  const Right<Failure, AdviceEntity>(
                     AdviceEntity(
                       advice: 'advice',
                       adviceId: 1,

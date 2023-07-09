@@ -17,9 +17,9 @@ class AdviceRepoImpl implements AdviceRepo {
     try {
       final result = await adviceRemoteDatasource.getRandomAdviceFromApi();
       return right(result);
-    } on ServerException catch (e) {
+    } on ServerException {
       return left(ServerFailure());
-    } on CacheException catch (e) {
+    } on CacheException {
       return left(CacheFailure());
     } catch (e) {
       return left(GeneralFailure());

@@ -7,7 +7,6 @@ import 'package:mockito/annotations.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../0_data/repositories/advice_repo_impl_test.mocks.dart';
 import 'advice_usecases_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AdviceRepoImpl>()])
@@ -21,14 +20,14 @@ void main() {
 
         when(mockAdviceRepoImpl.getAdviceFromDataSource()).thenAnswer(
             (realInvocation) => Future.value(
-                Right(AdviceEntity(advice: 'test', adviceId: 42))));
+                const Right(AdviceEntity(advice: 'test', adviceId: 42))));
         final result = await adviceUseCasesTest.getAdvice();
 
         expect(result.isLeft(), false);
         expect(result.isRight(), true);
         expect(
             result,
-            Right<Failure, AdviceEntity>(
+            const Right<Failure, AdviceEntity>(
                 AdviceEntity(advice: 'test', adviceId: 42)));
         verify(mockAdviceRepoImpl.getAdviceFromDataSource()).called(1);
         verifyNoMoreInteractions(mockAdviceRepoImpl);

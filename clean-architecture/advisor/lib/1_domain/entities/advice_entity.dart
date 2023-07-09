@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class AdviceEntity extends Equatable {
-  AdviceEntity({
+  const AdviceEntity({
     required this.advice,
     required this.adviceId,
   });
