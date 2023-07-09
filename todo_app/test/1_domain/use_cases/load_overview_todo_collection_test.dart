@@ -1,7 +1,7 @@
 import 'package:either_dart/either.dart';
-import 'package:test/test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:test/test.dart';
 import 'package:todo_app/0_data/repositories/todo_repository_mock.dart';
 import 'package:todo_app/1_domain/entities/todo_collection.dart';
 import 'package:todo_app/1_domain/entities/todo_color.dart';
@@ -22,7 +22,7 @@ void main() {
     (index) => ToDoCollection(
       id: CollectionId.fromUniqueString('test'),
       title: 'test collection',
-      todoColor: ToDoColor(
+      todoColor: const ToDoColor(
         colorIndex: 0,
       ),
     ),
