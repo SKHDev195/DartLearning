@@ -5,11 +5,11 @@ class CreateToDoCollectionPageCubitState extends Equatable {
   const CreateToDoCollectionPageCubitState({this.title, this.color});
 
   final String? title;
-  final String? color;
+  final Color? color;
 
   CreateToDoCollectionPageCubitState copyWith({
     String? title,
-    String? color,
+    Color? color,
   }) {
     return CreateToDoCollectionPageCubitState(
       color: color ?? this.color,

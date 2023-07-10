@@ -7,6 +7,7 @@ import 'package:todo_app/1_domain/repositories/todo_repository.dart';
 import 'package:todo_app/1_domain/use_cases/create_todo_collection.dart';
 import 'package:todo_app/2_application/core/page_config.dart';
 import 'package:todo_app/2_application/pages/create_todo_collection/bloc/cubit/create_to_do_collection_page_cubit.dart';
+import 'package:todo_app/2_application/pages/create_todo_collection/widgets/todo_collection_color_picker_dialog.dart';
 import 'package:todo_app/2_application/pages/detail/todo_detail_page.dart';
 
 class CreateToDoCollectionPageProvider extends StatelessWidget {
@@ -66,7 +67,9 @@ class _CreateToDoCollectionPageState extends State<CreateToDoCollectionPage> {
                 return null;
               },
             ),
-            TextFormField(
+            ToDoCollectionColorPicker(),
+
+            /*TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Color',
               ),
@@ -84,7 +87,7 @@ class _CreateToDoCollectionPageState extends State<CreateToDoCollectionPage> {
                 }
                 return null;
               },
-            ),
+            ),*/
             const SizedBox(
               height: 16,
             ),

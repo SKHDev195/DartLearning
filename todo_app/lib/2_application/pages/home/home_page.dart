@@ -10,7 +10,6 @@ import 'package:todo_app/2_application/pages/detail/todo_detail_page.dart';
 import 'package:todo_app/2_application/pages/home/bloc/cubit/navigation_todo_cubit.dart';
 import 'package:todo_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_app/2_application/pages/settings/settings_page.dart';
-import 'package:todo_app/2_application/pages/task/task_page.dart';
 
 class HomePageProvider extends StatelessWidget {
   const HomePageProvider({
@@ -42,7 +41,6 @@ class HomePage extends StatefulWidget {
   static const tabs = [
     DashboardPage.pageConfig,
     OverviewPage.pageConfig,
-    TaskPage.pageConfig,
   ];
 
   final int index;
@@ -155,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                                   );
 
                               if (selectedId == null) {
-                                return const Placeholder();
+                                return Container();
                               } else {
                                 return ToDoDetailPageProvider(
                                   key: Key(
