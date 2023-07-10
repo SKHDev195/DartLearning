@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_app/1_domain/entities/todo_collection.dart';
 import 'package:todo_app/1_domain/entities/todo_color.dart';
@@ -22,20 +23,24 @@ class CreateToDoCollectionPageCubit
     );
   }
 
-  void colorChanged(String color) {
+  void colorChanged(Color color) {
     emit(
       state.copyWith(color: color),
     );
   }
 
   Future<void> submit() async {
-    final parsedColorIndex = int.tryParse(state.color ?? '') ?? 0;
+    int chosenColorIndex = ToDoColor.predefinedColors
+        .indexWhere((element) => element.value == state.color?.value);
+    if (chosenColorIndex == -1) {
+      chosenColorIndex = 0;
+    }
     await createToDoCollection.call(
       ToDoCollectionParams(
         collection: ToDoCollection.empty().copyWith(
           title: state.title,
           todoColor: ToDoColor(
-            colorIndex: parsedColorIndex,
+            colorIndex: chosenColorIndex,
           ),
         ),
       ),
