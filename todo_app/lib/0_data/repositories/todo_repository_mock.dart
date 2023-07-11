@@ -153,4 +153,11 @@ class ToDoRepositoryMock implements ToDoRepository {
       () => const Right(true),
     );
   }
+
+  @override
+  Future<Either<Failure, bool>> deleteToDoCollection(
+      {required CollectionId collectionId}) {
+    // TODO: implement deleteToDoCollection
+    throw UnimplementedError();
+  }
 }

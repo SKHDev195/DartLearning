@@ -199,6 +199,25 @@ class ToDoRepositoryLocal extends ToDoRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> deleteToDoCollection(
+      {required CollectionId collectionId}) async {
+    try {
+      final result = await localDataSource.deleteToDoCollection(
+          collectionId: collectionId.value);
+
+      return Right(result);
+    } on Exception catch (e) {
+      return Future.value(
+        Left(
+          ServerFailure(
+            stackTrace: e.toString(),
+          ),
+        ),
+      );
+    }
+  }
 }
 
 ToDoEntryModel toDoEntryToModel(ToDoEntry entry) {

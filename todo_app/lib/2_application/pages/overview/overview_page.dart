@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/1_domain/use_cases/delete_todo_collection.dart';
 import 'package:todo_app/1_domain/use_cases/load_overview_todo_collections.dart';
 import 'package:todo_app/2_application/core/page_config.dart';
 import 'package:todo_app/2_application/pages/overview/bloc/cubit/todo_overview_cubit.dart';
@@ -15,6 +16,9 @@ class OverviewPageProvider extends StatelessWidget {
     return BlocProvider(
       create: (context) => ToDoOverviewCubit(
         loadOverviewToDoCollections: LoadOverviewToDoCollections(
+          toDoRepository: RepositoryProvider.of(context),
+        ),
+        deleteToDoCollection: DeleteToDoCollection(
           toDoRepository: RepositoryProvider.of(context),
         ),
       )..readToDoOverviewCollections(),

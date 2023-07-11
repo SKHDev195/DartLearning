@@ -21,11 +21,8 @@ class HomePageProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NavigationToDoCubit>(
-      create: (_) => NavigationToDoCubit(),
-      child: HomePage(
-        tab: tab,
-      ),
+    return HomePage(
+      tab: tab,
     );
   }
 }

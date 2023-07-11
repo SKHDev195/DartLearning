@@ -94,36 +94,33 @@ final routes = GoRouter(
       name: ToDoDetailPage.pageConfig.name,
       path: '$_basePath/overview/:collectionId',
       builder: (context, state) {
-        return BlocProvider(
-          create: (context) => NavigationToDoCubit(),
-          child: BlocListener<NavigationToDoCubit, NavigationToDoCubitState>(
-            listenWhen: (previous, current) =>
-                previous.isSecondBodyDisplayed != current.isSecondBodyDisplayed,
-            listener: (context, state) {
-              if (context.canPop() && (state.isSecondBodyDisplayed ?? false)) {
-                context.pop();
-              }
-            },
-            child: Scaffold(
-              appBar: AppBar(
-                title: const Text('Details'),
-                leading: BackButton(
-                  onPressed: () {
-                    if (context.canPop()) {
-                      context.pop();
-                    } else {
-                      context.pushNamed(
-                        HomePage.pageConfig.name,
-                        pathParameters: {'tab': OverviewPage.pageConfig.name},
-                      );
-                    }
-                  },
-                ),
+        return BlocListener<NavigationToDoCubit, NavigationToDoCubitState>(
+          listenWhen: (previous, current) =>
+              previous.isSecondBodyDisplayed != current.isSecondBodyDisplayed,
+          listener: (context, state) {
+            if (context.canPop() && (state.isSecondBodyDisplayed ?? false)) {
+              context.pop();
+            }
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Details'),
+              leading: BackButton(
+                onPressed: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.pushNamed(
+                      HomePage.pageConfig.name,
+                      pathParameters: {'tab': OverviewPage.pageConfig.name},
+                    );
+                  }
+                },
               ),
-              body: ToDoDetailPageProvider(
-                collectionId: CollectionId.fromUniqueString(
-                  state.pathParameters['collectionId'] ?? '',
-                ),
+            ),
+            body: ToDoDetailPageProvider(
+              collectionId: CollectionId.fromUniqueString(
+                state.pathParameters['collectionId'] ?? '',
               ),
             ),
           ),

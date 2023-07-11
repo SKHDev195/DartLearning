@@ -7,6 +7,7 @@ import 'package:todo_app/0_data/repositories/todo_repository_local.dart';
 import 'package:todo_app/0_data/repositories/todo_repository_mock.dart';
 import 'package:todo_app/1_domain/repositories/todo_repository.dart';
 import 'package:todo_app/2_application/app/todo_app.dart';
+import 'package:todo_app/2_application/pages/home/bloc/cubit/navigation_todo_cubit.dart';
 
 void main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
@@ -17,7 +18,10 @@ void main() async {
       create: (context) => ToDoRepositoryLocal(
         localDataSource: localDataSource,
       ),
-      child: const ToDoApp(),
+      child: BlocProvider<NavigationToDoCubit>(
+        create: (context) => NavigationToDoCubit(),
+        child: const ToDoApp(),
+      ),
     ),
   );
 }
