@@ -129,4 +129,24 @@ class MemoryLocalDataSource implements ToDoLocalDataSourceInterface {
       throw CacheException();
     }
   }
+
+  @override
+  Future<bool> deleteToDoCollection({required String collectionId}) {
+    try {
+      if (toDoEntries.containsKey(collectionId)) {
+        final collectionToDelete = toDoCollections.firstWhere(
+          (element) => element.id == collectionId,
+        );
+
+        toDoEntries[collectionId] = [];
+        toDoCollections.remove(collectionToDelete);
+
+        return Future.value(true);
+      } else {
+        throw CollectionNotFoundException();
+      }
+    } on Exception catch (_) {
+      throw CacheException();
+    }
+  }
 }

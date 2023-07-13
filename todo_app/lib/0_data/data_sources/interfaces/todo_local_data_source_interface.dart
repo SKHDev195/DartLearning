@@ -31,4 +31,8 @@ abstract class ToDoLocalDataSourceInterface {
     required String collectionId,
     required String entryId,
   });
+
+  Future<bool> deleteToDoCollection({
+    required String collectionId,
+  });
 }

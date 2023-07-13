@@ -26,4 +26,7 @@ abstract class ToDoRepository {
     CollectionId collectionId,
     ToDoEntry entry,
   );
+
+  Future<Either<Failure, bool>> deleteToDoCollection(
+      {required CollectionId collectionId});
 }

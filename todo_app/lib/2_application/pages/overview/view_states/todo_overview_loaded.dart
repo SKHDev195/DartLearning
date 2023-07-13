@@ -3,6 +3,7 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/1_domain/entities/todo_collection.dart';
+import 'package:todo_app/1_domain/entities/unique_id.dart';
 import 'package:todo_app/2_application/pages/create_todo_collection/create_todo_collection_page.dart';
 import 'package:todo_app/2_application/pages/detail/todo_detail_page.dart';
 import 'package:todo_app/2_application/pages/home/bloc/cubit/navigation_todo_cubit.dart';
@@ -85,6 +86,34 @@ class ToDoOverviewLoaded extends StatelessWidget {
             ),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: FloatingActionButton(
+              key: const Key('delete-todo-collection'),
+              heroTag: 'delete-todo-collection',
+              onPressed: () {
+                CollectionId? collectionIdToRemove = context
+                    .read<NavigationToDoCubit>()
+                    .state
+                    .selectedCollectionId;
+                if (collectionIdToRemove != null) {
+                  context.read<ToDoOverviewCubit>().removeToDoCollection(
+                        collectionId: collectionIdToRemove,
+                      );
+                  context
+                      .read<NavigationToDoCubit>()
+                      .emit(const NavigationToDoCubitState());
+                }
+              },
+              backgroundColor: Colors.redAccent,
+              child: const Icon(
+                Icons.delete_rounded,
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
