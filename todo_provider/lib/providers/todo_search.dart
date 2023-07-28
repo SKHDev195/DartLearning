@@ -3,14 +3,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class ToDoSearchState extends Equatable {
-  ToDoSearchState({
+  const ToDoSearchState({
     required this.searchTerm,
   });
 
   final String searchTerm;
 
   factory ToDoSearchState.initial() {
-    return ToDoSearchState(searchTerm: '');
+    return const ToDoSearchState(searchTerm: '');
   }
 
   ToDoSearchState copyWith({

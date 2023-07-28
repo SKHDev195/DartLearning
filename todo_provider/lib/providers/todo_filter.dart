@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:todo_provider/models/todo_model.dart';
 
 class ToDoFilterState extends Equatable {
-  ToDoFilterState({
+  const ToDoFilterState({
     required this.filter,
   });
 
   final Filter filter;
 
   factory ToDoFilterState.initial() {
-    return ToDoFilterState(
+    return const ToDoFilterState(
       filter: Filter.all,
     );
   }

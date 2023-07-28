@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'pages/todos_home_page.dart';
+import 'providers/providers.dart';
 
 void main() {
   runApp(
@@ -11,30 +15,40 @@ class ToDoProviderApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ToDo App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const ToDoHomePage(),
-    );
-  }
-}
-
-class ToDoHomePage extends StatefulWidget {
-  const ToDoHomePage({super.key});
-
-  @override
-  State<ToDoHomePage> createState() => _ToDoHomePageState();
-}
-
-class _ToDoHomePageState extends State<ToDoHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: const Text('TODOS'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ToDoFilter>(
+          create: (_) => ToDoFilter(),
+        ),
+        ChangeNotifierProvider<ToDoSearch>(
+          create: (_) => ToDoSearch(),
+        ),
+        ChangeNotifierProvider<ToDoList>(
+          create: (_) => ToDoList(),
+        ),
+        ChangeNotifierProxyProvider<ToDoList, ActiveToDoCount>(
+            create: (_) => ActiveToDoCount(),
+            update: (context, toDoList, activeToDoCount) =>
+                activeToDoCount!..update(toDoList)),
+        ChangeNotifierProxyProvider3<ToDoFilter, ToDoSearch, ToDoList,
+            FilteredToDos>(
+          create: (_) => FilteredToDos(),
+          update: (context, toDoFilter, toDoSearch, toDoList, filteredToDos) =>
+              filteredToDos!
+                ..update(
+                  toDoFilter,
+                  toDoSearch,
+                  toDoList,
+                ),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'ToDo App',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const ToDoHomePage(),
       ),
     );
   }
