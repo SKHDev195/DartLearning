@@ -91,10 +91,10 @@ class ToDoList with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeToDo(ToDo toDo) {
+  void removeToDo(ToDo toDoToRemove) {
     final newTodos = _state.toDos
         .where(
-          (ToDo toDo) => toDo.id != toDo.id,
+          (ToDo toDo) => toDo.id != toDoToRemove.id,
         )
         .toList();
 

@@ -27,12 +27,17 @@ class ToDoProviderApp extends StatelessWidget {
           create: (_) => ToDoList(),
         ),
         ChangeNotifierProxyProvider<ToDoList, ActiveToDoCount>(
-            create: (_) => ActiveToDoCount(),
-            update: (context, toDoList, activeToDoCount) =>
-                activeToDoCount!..update(toDoList)),
+          create: (context) => ActiveToDoCount(
+            initialActiveToDoCount: context.read<ToDoList>().state.toDos.length,
+          ),
+          update: (context, toDoList, activeToDoCount) =>
+              activeToDoCount!..update(toDoList),
+        ),
         ChangeNotifierProxyProvider3<ToDoFilter, ToDoSearch, ToDoList,
             FilteredToDos>(
-          create: (_) => FilteredToDos(),
+          create: (context) => FilteredToDos(
+            initialFilteredToDos: context.read<ToDoList>().state.toDos,
+          ),
           update: (context, toDoFilter, toDoSearch, toDoList, filteredToDos) =>
               filteredToDos!
                 ..update(

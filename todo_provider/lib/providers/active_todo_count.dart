@@ -32,7 +32,16 @@ class ActiveToDoCountState extends Equatable {
 }
 
 class ActiveToDoCount with ChangeNotifier {
-  ActiveToDoCountState _state = ActiveToDoCountState.initial();
+  ActiveToDoCount({
+    required this.initialActiveToDoCount,
+  }) {
+    _state = ActiveToDoCountState(
+      activeToDoCount: initialActiveToDoCount,
+    );
+  }
+  final int initialActiveToDoCount;
+  late ActiveToDoCountState _state;
+
   ActiveToDoCountState get state => _state;
 
   void update(ToDoList toDoList) {
