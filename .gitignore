@@ -2,3 +2,9 @@
 
 # Ignore failures
 **/failures/*
+
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+*.env
