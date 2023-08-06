@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+import '../providers/providers.dart';
 
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
-class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text('Settings'),
-        ),
+        title: const Text('Settings'),
       ),
-      body: const Center(
-        child: Text('Settings'),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListTile(
+          title: const Text('Temperature Unit'),
+          subtitle: const Text('Celsius/Fahrenheit (Default: Celsius)'),
+          trailing: Switch(
+            value: context.watch<TempSettingsProvider>().state.tempUnit ==
+                TempUnit.celsius,
+            onChanged: (_) {
+              context.read<TempSettingsProvider>().toggleTempUnit();
+            },
+          ),
+        ),
       ),
     );
   }
