@@ -1,6 +1,6 @@
 # Dart Learning
 
-This repository contains several Dart and Flutter objects made for personal learning purposes.
+This repository contains several Dart and Flutter objects made for personal learning purposes. Contains entry-level projects.
 
 ## Structure
 
